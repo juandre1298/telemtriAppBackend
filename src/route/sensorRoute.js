@@ -1,6 +1,6 @@
 
 const express = require('express');
-const controller = require('../controller/sensorControlller')
+const controller = require('../controller/sensorController')
 
 const router = express.Router();
 
