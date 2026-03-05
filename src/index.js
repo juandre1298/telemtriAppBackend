@@ -1,10 +1,10 @@
 
 require('dotenv').config();
 const express = require('express');
-const routes = require('./routes/routes.js');
+const routes = require('./route/sensorRoute.js');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 app.get('/', (req, res)=>{
   res.status(200);
