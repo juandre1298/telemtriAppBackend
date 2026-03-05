@@ -10,12 +10,12 @@ const fetchSensor = async (id) => {
   }
 } 
 
-const fetchSensorBatch = async (id) => {
+const fetchSensorBatch = async (ids) => {
   try{
-    const data = await service.getSensorBatchData(id);
-    return data
+    const data = await service.getSensorBatchData(ids);
+    return data;
   }catch(e){
-    console.log("error: "+e)
+    console.log("error: "+ e)
   }
 } 
 

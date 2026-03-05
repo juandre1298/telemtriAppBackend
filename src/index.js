@@ -11,6 +11,16 @@ app.get('/', (req, res)=>{
   res.send("Server is running")
 })
 
+if (process.env.NODE_ENV === 'development') {
+  app.use((req, res, next) => {
+    const timestamp = new Date().toLocaleTimeString();
+    const green = "\x1b[32m";
+    const reset = "\x1b[0m";
+    console.log(`[${timestamp}] ${green}${req.method}${reset} request to: ${req.originalUrl}`);
+    next();
+  });
+}
+
 app.use("/api", routes)
 
 app.listen(PORT, (error)=>{

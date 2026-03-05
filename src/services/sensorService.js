@@ -18,8 +18,12 @@ const getSensorData = (id) => {
   })
 }
 
-const getSensorBatchData = (id) =>{
-  console.log('todo cool')
+const getSensorBatchData = async (ids) =>{
+  if(!ids){
+    throw Error('No Ids')
+  } 
+  const ans = ids.map(id => getSensorData(id))
+  return await Promise.all(ans)
 }
 
 
