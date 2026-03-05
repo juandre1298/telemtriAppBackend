@@ -1,22 +1,23 @@
-const service = require('../services/sensorService')
+const service = require('../services/sensorService');
 
+const SensorController = {
+  fetchSensor: async (req, res) => {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ error: "ID is required" });
 
-const fetchSensor = async (id) => {
-  try{
-    const data = await service.getSensorData(id);
-    return data
-  }catch(e){
-    console.log("error: "+e)
+    const data = await service.getById(id);
+    res.status(200).json(data);
+  },
+
+  fetchSensorBatch: async (req, res) => {
+    const { ids } = req.query;
+    if (!ids) return res.status(400).json({ error: "IDs query param is required" });
+
+    const idList = ids.split(',').map(id => id.trim()).filter(Boolean);
+    
+    const data = await service.getBatch(idList);
+    res.status(200).json(data);
   }
-} 
+};
 
-const fetchSensorBatch = async (ids) => {
-  try{
-    const data = await service.getSensorBatchData(ids);
-    return data;
-  }catch(e){
-    console.log("error: "+ e)
-  }
-} 
-
-module.exports = { fetchSensor, fetchSensorBatch };
+module.exports = SensorController;
